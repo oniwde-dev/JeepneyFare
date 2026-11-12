@@ -196,7 +196,7 @@ class TripRecord {
         System.out.println("Route: " + route);
         System.out.println("Passenger Type: " + passengerType);
 
-        System.out.println("----------------------------------------------");
+        System.out.println("-----------------------------------------------");
 
         System.out.printf("Required Fare : PHP %.2f%n", fare);
         System.out.printf("Amount Paid   : PHP %.2f%n", amountPaid);
