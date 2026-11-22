@@ -13,8 +13,7 @@ abstract class Jeepney {
     private String route;
     private String passengerType;
 
-    public Jeepney(String jeepneyType, String route,
-                   String passengerType) {
+    public Jeepney(String jeepneyType, String route, String passengerType) {
         this.jeepneyType = jeepneyType;
         this.route = route;
         this.passengerType = passengerType;
@@ -57,8 +56,7 @@ class Bauan extends Jeepney {
     @Override
     public double calculateFare() {
 
-        if (getRoute().equalsIgnoreCase("Sta. Rita to Batangas")
-                || getRoute().equalsIgnoreCase("Batangas to Sports Complex")) {
+        if (getRoute().equalsIgnoreCase("Sta. Rita to Batangas") || getRoute().equalsIgnoreCase("Batangas to Sports Complex")) {
             return getPassengerType().equalsIgnoreCase("Regular")
                     ? 15.00 : 12.00;
         }
@@ -84,8 +82,18 @@ class Alangilan extends Jeepney {
     @Override
     public double calculateFare() {
 
-        if (getRoute().equalsIgnoreCase("Batangas to Alangilan")
-                || getRoute().equalsIgnoreCase("Batangas to SM Hyper")) {
+        if (getRoute().equalsIgnoreCase("Batangas to Grand Terminal")) {
+            return getPassengerType().equalsIgnoreCase("Regular")
+                    ? 17.00 : 14.00;
+        }
+
+        else if (getRoute().equalsIgnoreCase("Batangas to SM Hyper")
+                || getRoute().equalsIgnoreCase("Batangas to Alangilan")
+                || getRoute().equalsIgnoreCase("Batangas City to GCH")
+                || getRoute().equalsIgnoreCase("Batangas City to Water District")
+                || getRoute().equalsIgnoreCase("Alangilan to Lumang Palengke")
+                || getRoute().equalsIgnoreCase("Alangilan to Bagong Palengke")
+                || getRoute().equalsIgnoreCase("Alangilan to BSU PB")) {
             return getPassengerType().equalsIgnoreCase("Regular")
                     ? 15.00 : 12.00;
         }
@@ -107,14 +115,12 @@ class Balagtas extends Jeepney {
     @Override
     public double calculateFare() {
 
-        if (getRoute().equalsIgnoreCase("Batangas to Balagtas")
-                || getRoute().equalsIgnoreCase("Batangas to Grand Terminal")) {
+        if (getRoute().equalsIgnoreCase("Batangas to Balagtas") || getRoute().equalsIgnoreCase("Batangas to Grand Terminal")) {
             return getPassengerType().equalsIgnoreCase("Regular")
                     ? 17.00 : 14.00;
         }
 
-        else if (getRoute().equalsIgnoreCase("Batangas to Alangilan")
-                || getRoute().equalsIgnoreCase("Batangas to SM Hyper")) {
+        else if (getRoute().equalsIgnoreCase("Batangas to Alangilan") || getRoute().equalsIgnoreCase("Batangas to SM Hyper")) {
             return getPassengerType().equalsIgnoreCase("Regular")
                     ? 15.00 : 12.00;
         }
@@ -136,9 +142,51 @@ class Capitolio extends Jeepney {
     @Override
     public double calculateFare() {
 
-        if (getRoute().equalsIgnoreCase("Capitolio to SM Batangas")) {
+        if (getRoute().equalsIgnoreCase("Capitolio to SM Batangas")
+                || getRoute().equalsIgnoreCase("Batangas City to Gulod")
+                || getRoute().equalsIgnoreCase("Batangas City to Batangas Medical Center")
+                || getRoute().equalsIgnoreCase("Batangas City to Hilltop")
+                || getRoute().equalsIgnoreCase("SM Batangas to Lumang Palengke")
+                || getRoute().equalsIgnoreCase("SM Batangas to Don Ramos")) {
             return getPassengerType().equalsIgnoreCase("Regular")
                     ? 15.00 : 12.00;
+        }
+
+        return 0;
+    }
+}
+
+// ==========================================
+// INHERITANCE: LIPA
+// ==========================================
+
+class Lipa extends Jeepney {
+
+    public Lipa(String route, String type) {
+        super("Lipa", route, type);
+    }
+
+    @Override
+    public double calculateFare() {
+
+        if (getRoute().equalsIgnoreCase("SM Lipa to Tambo") || getRoute().equalsIgnoreCase("Batangas City to Diversion Road")) {
+            return getPassengerType().equalsIgnoreCase("Regular")
+                    ? 15.00 : 12.00;
+        }
+
+        else if (getRoute().equalsIgnoreCase("SM Lipa to San Jose") || getRoute().equalsIgnoreCase("Batangas City to San Jose")) {
+            return getPassengerType().equalsIgnoreCase("Regular")
+                    ? 30.00 : 24.00;
+        }
+
+        else if (getRoute().equalsIgnoreCase("SM Lipa to Bukal")) {
+            return getPassengerType().equalsIgnoreCase("Regular")
+                    ? 20.00 : 16.00;
+        }
+
+        else if (getRoute().equalsIgnoreCase("SM Lipa to Alangilan / Balagtas") || getRoute().equalsIgnoreCase("Batangas City to SM Lipa")) {
+            return getPassengerType().equalsIgnoreCase("Regular")
+                    ? 40.00 : 32.00;
         }
 
         return 0;
@@ -168,8 +216,7 @@ class TripRecord {
         this.amountPaid = amountPaid;
         this.change = amountPaid - fare;
 
-        DateTimeFormatter formatter =
-                DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         this.dateTime = LocalDateTime.now().format(formatter);
     }
 
@@ -196,7 +243,7 @@ class TripRecord {
         System.out.println("Route: " + route);
         System.out.println("Passenger Type: " + passengerType);
 
-        System.out.println("-----------------------------------------------");
+        System.out.println("----------------------------------------------");
 
         System.out.printf("Required Fare : PHP %.2f%n", fare);
         System.out.printf("Amount Paid   : PHP %.2f%n", amountPaid);
@@ -239,7 +286,6 @@ public class JeepneyFare {
             choice = readInt("Enter your choice: ");
 
             switch (choice) {
-
                 case 1:
                     calculateAndRecordTrip();
                     break;
@@ -320,8 +366,7 @@ public class JeepneyFare {
 
                 double value = Double.parseDouble(input.nextLine().trim());
 
-                if (Double.isNaN(value) || Double.isInfinite(value)
-                        || value < 0) {
+                if (Double.isNaN(value) || Double.isInfinite(value) || value < 0) {
                     System.out.println("Please enter a valid positive amount.");
                 } else {
                     return value;
@@ -358,12 +403,12 @@ public class JeepneyFare {
             System.out.println("[2] Alangilan");
             System.out.println("[3] Balagtas");
             System.out.println("[4] Capitolio");
+            System.out.println("[5] Lipa");
             System.out.println("[0] Return to Main Menu");
 
             int choice = readInt("\nSelect Jeepney Type: ");
 
             switch (choice) {
-
                 case 1:
                     jeepney = "Bauan";
                     break;
@@ -375,6 +420,9 @@ public class JeepneyFare {
                     break;
                 case 4:
                     jeepney = "Capitolio";
+                    break;
+                case 5:
+                    jeepney = "Lipa";
                     break;
                 case 0:
                     System.out.println("Returning to Main Menu...");
@@ -395,22 +443,42 @@ public class JeepneyFare {
                     + " JEEPNEY ROUTES ==========");
 
             if (jeepney.equals("Bauan")) {
-                System.out.println("[1] Sta. Rita to Batangas (and vice versa)");
-                System.out.println("[2] Batangas to Bauan (and vice versa)");
-                System.out.println("[3] Batangas to Sports Complex (and vice versa)");
+                System.out.println("[1] Sta. Rita to Batangas");
+                System.out.println("[2] Batangas to Bauan");
+                System.out.println("[3] Batangas to Sports Complex");
             }
             else if (jeepney.equals("Alangilan")) {
-                System.out.println("[1] Batangas to SM Hyper (and vice versa)");
-                System.out.println("[2] Batangas to Alangilan (and vice versa)");
+                System.out.println("[1] Batangas to SM Hyper");
+                System.out.println("[2] Batangas to Alangilan");
+                System.out.println("[3] Batangas City to Grand Terminal");
+                System.out.println("[4] Batangas City to GCH");
+                System.out.println("[5] Batangas City to Water District");
+                System.out.println("[6] Alangilan to Lumang Palengke");
+                System.out.println("[7] Alangilan to Bagong Palengke");
+                System.out.println("[8] Alangilan to BSU PB");
             }
             else if (jeepney.equals("Balagtas")) {
-                System.out.println("[1] Batangas to SM Hyper (and vice versa)");
-                System.out.println("[2] Batangas to Grand Terminal (and vice versa)");
-                System.out.println("[3] Batangas to Balagtas (and vice versa)");
-                System.out.println("[4] Batangas to Alangilan (and vice versa)");
+                System.out.println("[1] Batangas to SM Hyper");
+                System.out.println("[2] Batangas to Grand Terminal");
+                System.out.println("[3] Batangas to Balagtas");
+                System.out.println("[4] Batangas to Alangilan");
             }
             else if (jeepney.equals("Capitolio")) {
-                System.out.println("[1] Capitolio to SM Batangas (and vice versa)");
+                System.out.println("[1] Capitolio to SM Batangas");
+                System.out.println("[2] Batangas City to Gulod");
+                System.out.println("[3] Batangas City to Batangas Medical Center");
+                System.out.println("[4] Batangas City to Hilltop");
+                System.out.println("[5] SM Batangas to Lumang Palengke");
+                System.out.println("[6] SM Batangas to Don Ramos");
+            }
+            else if (jeepney.equals("Lipa")) {
+                System.out.println("[1] SM Lipa to Tambo");
+                System.out.println("[2] SM Lipa to San Jose");
+                System.out.println("[3] SM Lipa to Bukal");
+                System.out.println("[4] SM Lipa to Alangilan / Balagtas");
+                System.out.println("[5] Batangas City to Diversion Road");
+                System.out.println("[6] Batangas City to San Jose");
+                System.out.println("[7] Batangas City to SM Lipa");
             }
 
             System.out.println("[0] Cancel and Return to Main Menu");
@@ -438,7 +506,6 @@ public class JeepneyFare {
                         continue;
                 }
             }
-
             else if (jeepney.equals("Alangilan")) {
                 switch (routeChoice) {
                     case 1:
@@ -447,12 +514,29 @@ public class JeepneyFare {
                     case 2:
                         route = "Batangas to Alangilan";
                         break;
+                    case 3:
+                        route = "Batangas to Grand Terminal";
+                        break;
+                    case 4:
+                        route = "Batangas City to GCH";
+                        break;
+                    case 5:
+                        route = "Batangas City to Water District";
+                        break;
+                    case 6:
+                        route = "Alangilan to Lumang Palengke";
+                        break;
+                    case 7:
+                        route = "Alangilan to Bagong Palengke";
+                        break;
+                    case 8:
+                        route = "Alangilan to BSU PB";
+                        break;
                     default:
                         System.out.println("Invalid route number!");
                         continue;
                 }
             }
-
             else if (jeepney.equals("Balagtas")) {
                 switch (routeChoice) {
                     case 1:
@@ -472,13 +556,57 @@ public class JeepneyFare {
                         continue;
                 }
             }
-
             else if (jeepney.equals("Capitolio")) {
-                if (routeChoice == 1) {
-                    route = "Capitolio to SM Batangas";
-                } else {
-                    System.out.println("Invalid route number!");
-                    continue;
+                switch (routeChoice) {
+                    case 1:
+                        route = "Capitolio to SM Batangas";
+                        break;
+                    case 2:
+                        route = "Batangas City to Gulod";
+                        break;
+                    case 3:
+                        route = "Batangas City to Batangas Medical Center";
+                        break;
+                    case 4:
+                        route = "Batangas City to Hilltop";
+                        break;
+                    case 5:
+                        route = "SM Batangas to Lumang Palengke";
+                        break;
+                    case 6:
+                        route = "SM Batangas to Don Ramos";
+                        break;
+                    default:
+                        System.out.println("Invalid route number!");
+                        continue;
+                }
+            }
+            else if (jeepney.equals("Lipa")) {
+                switch (routeChoice) {
+                    case 1:
+                        route = "SM Lipa to Tambo";
+                        break;
+                    case 2:
+                        route = "SM Lipa to San Jose";
+                        break;
+                    case 3:
+                        route = "SM Lipa to Bukal";
+                        break;
+                    case 4:
+                        route = "SM Lipa to Alangilan / Balagtas";
+                        break;
+                    case 5:
+                        route = "Batangas City to Diversion Road";
+                        break;
+                    case 6:
+                        route = "Batangas City to San Jose";
+                        break;
+                    case 7:
+                        route = "Batangas City to SM Lipa";
+                        break;
+                    default:
+                        System.out.println("Invalid route number!");
+                        continue;
                 }
             }
 
@@ -521,8 +649,11 @@ public class JeepneyFare {
         else if (jeepney.equals("Balagtas")) {
             selectedJeepney = new Balagtas(route, passengerType);
         }
-        else {
+        else if (jeepney.equals("Capitolio")) {
             selectedJeepney = new Capitolio(route, passengerType);
+        }
+        else {
+            selectedJeepney = new Lipa(route, passengerType);
         }
 
         // FARE CALCULATION
@@ -607,6 +738,12 @@ public class JeepneyFare {
         System.out.println("\nALANGILAN JEEPNEY");
         System.out.println("1. Batangas to SM Hyper (and vice versa)        PHP 15 / PHP 12");
         System.out.println("2. Batangas to Alangilan (and vice versa)       PHP 15 / PHP 12");
+        System.out.println("3. Batangas City to Grand Terminal (and vice versa) PHP 17 / PHP 14");
+        System.out.println("4. Batangas City to GCH (and vice versa)        PHP 15 / PHP 12");
+        System.out.println("5. Batangas City to Water District (and vice versa) PHP 15 / PHP 12");
+        System.out.println("6. Alangilan to Lumang Palengke (and vice versa) PHP 15 / PHP 12");
+        System.out.println("7. Alangilan to Bagong Palengke (and vice versa) PHP 15 / PHP 12");
+        System.out.println("8. Alangilan to BSU PB (and vice versa)         PHP 15 / PHP 12");
 
         System.out.println("\nBALAGTAS JEEPNEY");
         System.out.println("1. Batangas to SM Hyper (and vice versa)        PHP 15 / PHP 12");
@@ -616,6 +753,20 @@ public class JeepneyFare {
 
         System.out.println("\nCAPITOLIO JEEPNEY");
         System.out.println("1. Capitolio to SM Batangas (and vice versa)    PHP 15 / PHP 12");
+        System.out.println("2. Batangas City to Gulod (and vice versa)      PHP 15 / PHP 12");
+        System.out.println("3. Batangas City to Batangas Medical Center (and vice versa) PHP 15 / PHP 12");
+        System.out.println("4. Batangas City to Hilltop (and vice versa)    PHP 15 / PHP 12");
+        System.out.println("5. SM Batangas to Lumang Palengke (and vice versa) PHP 15 / PHP 12");
+        System.out.println("6. SM Batangas to Don Ramos (and vice versa)    PHP 15 / PHP 12");
+
+        System.out.println("\nLIPA JEEPNEY");
+        System.out.println("1. SM Lipa to Tambo (and vice versa)            PHP 15 / PHP 12");
+        System.out.println("2. SM Lipa to San Jose (and vice versa)         PHP 30 / PHP 24");
+        System.out.println("3. SM Lipa to Bukal (and vice versa)            PHP 20 / PHP 16");
+        System.out.println("4. SM Lipa to Alangilan / Balagtas (and vice versa) PHP 40 / PHP 32");
+        System.out.println("5. Batangas City to Diversion Road (and vice versa) PHP 15 / PHP 12");
+        System.out.println("6. Batangas City to San Jose (and vice versa)   PHP 30 / PHP 24");
+        System.out.println("7. Batangas City to SM Lipa (and vice versa)    PHP 40 / PHP 32");
 
         System.out.println("----------------------------------------------");
         System.out.println("Fare format: Regular / Student-PWD");
