@@ -510,7 +510,7 @@ Name: [COMIA,EDWIN E.] Role: LEAD PROGRAMMER Project: Analyzing the Transportati
 
 Contact
 
-GitHub: 
+GitHub: https://github.com/oniwde-dev
 
 E-mail: comiaedwin18@gmail.com
 
