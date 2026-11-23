@@ -564,8 +564,16 @@ Budget Utilization: 12.00%
 ● The expense summary will only reflect transactions saved by the user in the available records. It will not automatically track every actual jeepney ride.
 
 
-## Project Contributor 👥
-Name: [COMIA,EDWIN E.] Role: LEAD PROGRAMMER Project: Analyzing the Transportation Fare of Commuters in Batangas City
+## Project Contributors 👥
+Project: Analyzing the Transportation Fare of Commuters in Batangas City
+
+      COMIA,EDWIN E. Role: LEAD PROGRAMMER 
+
+      GANTIA, JENNY I. Role: DOCUMENTAION LEADER
+      
+      LAGRISOLA, NALIAH SHANTAL E. Role: TEAM LEADER
+      
+      MARASIGAN, VON IVAN B. Role: SYSTEM/DESIGN LEAD
 
 Contact
 
